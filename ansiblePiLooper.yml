@@ -1,0 +1,14 @@
+---
+- hosts: pi
+  become: true
+  pre_tasks:
+    - name: update
+      tags: always
+      apt: update_cache=yes
+      
+    - name: cloning_git_repo
+      git: 
+        repo: https://github.com/adafruit/pi_video_looper.git
+        dest: /home/pi/videoLooper
+        version: master
+...
