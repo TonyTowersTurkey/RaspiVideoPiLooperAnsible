@@ -1,0 +1,6 @@
+---
+  - host: pi
+    tasks:
+    - name: Clone the Adafruit video pi looper repo
+      git:
+        repo: https://github.com/adafruit/pi_video_looper.git
