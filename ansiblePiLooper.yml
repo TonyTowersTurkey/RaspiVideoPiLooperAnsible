@@ -1,0 +1,33 @@
+---
+- hosts: pi
+  become: true
+  pre_tasks:
+     - name: update
+       tags: always
+       apt: update_cache=yes
+
+     - name: update cache & Install git
+       apt:
+         name: git
+         state: present
+         update_cache: yes
+
+     - name: cloning_git_repo
+       git: 
+         repo: https://github.com/adafruit/pi_video_looper.git
+         dest: /home/pi/videoLooper
+         version: master
+
+     - name: Run install script 
+       command: sudo sh /home/pi/videoLooper/install.sh
+
+     - name: Run enable script
+       command: sudo sh /home/pi/videoLooper/enable.sh
+
+     - name: copy 'video_looper.ini' to pi
+       ansible.builtin.copy:
+         src: //Users/tonytowers/dev/raspiVideoPiLooperAnsible/video_looper.ini
+         dest: /boot/video_looper.ini
+
+
+...
