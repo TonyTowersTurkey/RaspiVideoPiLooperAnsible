@@ -18,8 +18,11 @@
          dest: /home/pi/videoLooper
          version: master
 
-     - name: Run a script with arguments (free form)
+     - name: Run install script 
        command: sudo sh /home/pi/videoLooper/install.sh
+
+     - name: Run enable script
+       command: sudo sh /home/pi/videoLooper/enable.sh
 
      - name: copy 'video_looper.ini' to pi
        ansible.builtin.copy:

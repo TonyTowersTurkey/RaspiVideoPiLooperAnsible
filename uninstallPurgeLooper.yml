@@ -1,0 +1,20 @@
+---
+- hosts: pi
+  become: true
+  pre_tasks:
+     - name: update
+       tags: always
+       apt: update_cache=yes
+
+     - name: Run a script with arguments (free form)
+       command: sudo sh /home/pi/videoLooper/disable.sh
+
+     - name: delete looper directory
+       ansible.builtin.file:
+         path: /home/pi/videoLooper
+         state: absent
+
+     - name: delete video directory
+       ansible.builtin.file:
+         path: /home/pi/video
+         state: absent
